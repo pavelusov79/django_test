@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from django.views.generic import CreateView, TemplateView
+from django.forms import inlineformset_factory
 
 from mainapp.forms import RecordForm
-from mainapp.models import CountryRegion
+from mainapp.models import CountryRegion, Country
 
 
 def send_form(request):
