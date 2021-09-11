@@ -1,22 +1,25 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, TemplateView
-from django.forms import inlineformset_factory
+from django.views.generic import CreateView
 
 from mainapp.forms import RecordForm
-from mainapp.models import CountryRegion, Country
+from mainapp.models import CountryRegion
 
 
-def send_form(request):
-    title = 'Форма'
+class CreateProduct(CreateView):
     sent = False
-    form = RecordForm()
-    if request.method == 'POST':
-        form = RecordForm(request.POST)
-        if form.is_valid():
-            form.save()
-            sent = True
-    context = {'title': title, 'form': form, 'sent': sent}
-    return render(request, 'mainapp/form.html', context)
+    template_name = 'mainapp/form.html'
+    form_class = RecordForm
+    success_url = 'send_form'
+
+    def form_valid(self, form):
+        self.sent = True
+        super(CreateProduct, self).form_valid(form)
+        return render(self.request, self.template_name, self.get_context_data(form=form))
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateProduct, self).get_context_data(**kwargs)
+        context['sent'] = self.sent
+        return context
 
 
 def load_region(request):
