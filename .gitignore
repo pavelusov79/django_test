@@ -1,0 +1,7 @@
+venv/
+new_env/
+.idea/
+api/__pycache__/
+mainapp/__pycache__/
+test_project/__pycache__/
+
