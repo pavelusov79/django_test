@@ -1,0 +1,20 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block title %}Регистрация{% endblock title %}
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-5 text-center font-italic">Регистрация</h1>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6">
+            <form class="form-horizontal" action="#" method="post"
+                  enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {{ seeker_form.as_p }}
+                <input class="form-control btn btn-outline-primary mt-4 mb-5" type="submit" value="зарегистрироваться">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
