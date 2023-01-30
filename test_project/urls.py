@@ -24,4 +24,5 @@ urlpatterns = [
     path('load_regions/', views.load_region),
     path('', include('api.urls', namespace='api')),
     path('api-auth/', include('rest_framework.urls')),
+    path('register/', views.UserCreateView.as_view(), name='register')
 ]

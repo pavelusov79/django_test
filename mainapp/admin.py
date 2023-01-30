@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from mainapp.forms import RecordForm
-from mainapp.models import Country, CountryRegion, Product
+from mainapp.models import Country, CountryRegion, Product, Seeker
 
 
 admin.site.register(Country)
@@ -23,3 +23,12 @@ class ProductAdmin(admin.ModelAdmin):
 
     class Media:
         js = ('js/script.js', 'js/jquery-3.6.0-min.js')
+
+
+def name(obj):
+    return f'{obj.user.first_name} {obj.user.last_name}'
+
+
+@admin.register(Seeker)
+class SeekerAdmin(admin.ModelAdmin):
+    list_display = (name, 'user')

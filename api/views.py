@@ -35,6 +35,6 @@ class ProductList(generics.ListCreateAPIView):
 
 
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Product.objects.all()
+    queryset = Product.objects.select_related("country_product").all()
     serializer_class = serializers.ProductSerializer
     permission_classes = [permissions.IsAdminUser]
