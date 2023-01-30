@@ -1,5 +1,6 @@
 import re
 
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db import models
 
@@ -52,3 +53,13 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
+
+
+class Seeker(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='имя на портале')
+    age = models.PositiveSmallIntegerField(verbose_name='ваш возраст')
+    skills = models.CharField(max_length=256, verbose_name='ваши навыки')
+
+    class Meta:
+        verbose_name_plural = 'Соискатели'
+
